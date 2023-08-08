@@ -1,0 +1,31 @@
+name: Run pytest on commit
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  python-ci-cd:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Python 3.9
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.9
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run pytest ex_1
+        run: |
+          cd src/ex_1
+          python -m pytest
+
+      - name: Run pytest ex_2
+        run: |
+          cd src/ex_2
+          python -m pytest
